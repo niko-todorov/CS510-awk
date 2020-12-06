@@ -1,9 +1,11 @@
 #!/bin/bash
-mkdir -p hw5dir
-for d in $(seq 5); do 
-	mkdir -p hw5dir\/sub$d
-	for l in $(seq 5); do 
-		echo "line: $l" >> hw5dir\/sub$d\/hw5file
-	done
+echo starting...
+# mkdir -p hw5dir/sub{001..500}
+mkdir -p hw5dir/sub{1..5}
+_blrp="alpha\nbeta\ngamma\ndelta\nepsilon"
+for d in {1..5}; do 
+        # mkdir "./hw5dir/sub${d}"
+	echo -e $_blrp>>"hw5dir/sub${d}/hw5file"
 done
-echo that\'s all folks!
+echo the end
+
