@@ -1,4 +1,5 @@
 #!/bin/bash
+# cd /mnt/c/projects/GitHub/chapman/hw5
 # ends in 0, the delta should be: a phrase of your choosing.
 # ends in 1, the delta should be: "eat beets"
 # ends in 4, the delta should be: "squash are great"
