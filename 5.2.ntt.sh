@@ -18,5 +18,5 @@ awk '/2$/ || /3$/ || /6$/ || /8$/ || /9$/ {print "hw5dir/" $1 "/hw5file.txt"}' _
 #cat _0 | awk '{print "cat " $1 " | awk 'FNR == 4'"}' 
 cat _0 | awk '{print "cat " $1 " | awk `NR==4`" }' 
 # clean up temp files
-# rm _0 _1 _4 _5 _7 _blanks _dirs
+rm _0 _1 _4 _5 _7 _blanks _dirs
 echo 5.2 finished
