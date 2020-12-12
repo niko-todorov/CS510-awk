@@ -6,17 +6,25 @@
 # ends in 5, the delta should be: "dogs are better than cats"
 # ends in 7, the delta should be: "hello world"
 # ends in 2, 3, 6, 8, 9, the delta should be: "___"
-echo 5.2 starting...
-# get the directories
-ls -l hw5dir | awk '{print $9}' > _dirs
-awk '/0$/ {print "hw5dir/" $1 "/hw5file.txt"}' _dirs > _0
-awk '/1$/ {print "hw5dir/" $1 "/hw5file.txt"}' _dirs > _1
-awk '/4$/ {print "hw5dir/" $1 "/hw5file.txt"}' _dirs > _4
-awk '/5$/ {print "hw5dir/" $1 "/hw5file.txt"}' _dirs > _5
-awk '/7$/ {print "hw5dir/" $1 "/hw5file.txt"}' _dirs > _7
-awk '/2$/ || /3$/ || /6$/ || /8$/ || /9$/ {print "hw5dir/" $1 "/hw5file.txt"}' _dirs > _blanks
-#cat _0 | awk '{print "cat " $1 " | awk 'FNR == 4'"}' 
-cat _0 | awk '{print "cat " $1 " | awk `NR==4`" }' 
-# clean up temp files
-rm _0 _1 _4 _5 _7 _blanks _dirs
-echo 5.2 finished
+echo $0 starting...
+# loop dir in range
+for d in {1..500}; do
+	# set paths
+	_cur="hw5dir/sub${d}/hw5file.txt"
+	_tmp="hw5dir/sub${d}/.hw5file.txt"
+	#echo "current dir: $_cur"
+	# set filter replacements
+	if   [ $(($d%10)) = 0 ]; then _r="vodki malo"
+	elif [ $(($d%10)) = 1 ]; then _r="eat beets"
+	elif [ $(($d%10)) = 4 ]; then _r="squash are great"
+	elif [ $(($d%10)) = 5 ]; then _r="dogs aint better than cats"
+	elif [ $(($d%10)) = 7 ]; then _r="hello world"
+	else _r="" 
+	fi
+	# the freakin awk
+	awk -v rpl="$_r" '{ if (4==NR) print rpl 
+			    else print $0 }' $_cur > $_tmp
+	# clean up
+	mv -f $_tmp $_cur
+done
+echo $0 finished
